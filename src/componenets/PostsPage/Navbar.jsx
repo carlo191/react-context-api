@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 
-export default function NavBar() {
+export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
-          Home
+          React
         </NavLink>
         <button
           className="navbar-toggler"
@@ -21,7 +21,12 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink className="nav-link " aria-current="page" to="/about">
+              <NavLink className="nav-link" to="/">
+                Homepage
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/about">
                 About
               </NavLink>
             </li>
@@ -30,8 +35,6 @@ export default function NavBar() {
                 Posts
               </NavLink>
             </li>
-            <li className="nav-item"></li>
-            <li className="nav-item"></li>
           </ul>
         </div>
       </div>

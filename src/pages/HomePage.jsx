@@ -1,9 +1,9 @@
 export default function HomePage() {
-    return (
-      <>
-        <div className="container">
-          <h1 className="mt-5">HomePage</h1>
-        </div>
-      </>
-    );
-  }
+  return (
+    <>
+      <section className="hero">
+        <span className="bg-shadow">Homepage</span>
+      </section>
+    </>
+  );
+}

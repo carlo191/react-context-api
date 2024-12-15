@@ -1,14 +1,15 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../componenets/PostsPage/Navbar";
+import Navbar from "../componenets/Navbar";
+
 export default function DefaultLayout() {
   return (
-    <div>
+    <>
       <header>
-        <Navbar> </Navbar>
+        <Navbar></Navbar>
       </header>
-      <main>
-        <Outlet />
-      </main>
-    </div>
+      <div className="">
+        <Outlet></Outlet>
+      </div>
+    </>
   );
 }

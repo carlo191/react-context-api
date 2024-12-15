@@ -1,33 +1,36 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-// # Contexts
-import { PostsContextProvider } from "./contexts/PostsContext";
+// Contexts
+import { PostContextProvider } from "./contexts/PostsContext";
 
-// # Layout
-import DefaultLayout from "./layouts/DefaultLayout";
+// Layouts
+import DefaultLayout from "./Layouts/DefaultLayout";
 
-// # Pages
-import HomePage from "./pages/HomePage";
-import About from "./pages/About";
-import PostsPage from "./pages/PostsPage";
-import ShowPost from "./pages/ShowPost";
-import NotFound from "./pages/NotFound";
+// Pages
+import HomePage from "./Pages/HomePage";
+import AboutPage from "./Pages/AboutPage";
+
+// Post pages
+import PostCard from "./Pages/Posts/PostCard";
+import PostPage from "./Pages/Posts/PostPage";
 
 function App() {
   return (
-    <PostsContextProvider>
+    <PostContextProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route path="/" Component={HomePage} />
-            <Route path="/about" Component={About} />
-            <Route path="/posts" Component={PostsPage} />
-            <Route path="/posts/:id" Component={ShowPost} />
-            <Route path="/not-found" Component={NotFound} />
+          <Route Component={DefaultLayout}>
+            <Route index Component={HomePage}></Route>
+            <Route path="/about" Component={AboutPage}></Route>
+            <Route path="/posts">
+              <Route index Component={PostPage}></Route>
+              <Route path=":id" Component={PostCard}></Route>
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
-    </PostsContextProvider>
+    </PostContextProvider>
   );
 }
 

@@ -1,54 +1,22 @@
-import { useState, useEffect } from "react";
-import { createContext, useContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
-const PostsContext = createContext();
+export const PostContext = createContext();
 
-export const PostsContextProvider = ({ children }) => {
-  const fetchPostsData = () => {
-    fetch("http://localhost:3000/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        const posts = data.map((post) => ({
-          id: post.id,
-          title: post.title,
-          author: post.author,
-          content: post.content,
-          image: post.image,
-          category: post.category,
-          pubblished: post.pubblished,
-        }));
+export const PostContextProvider = ({ children }) => {
+  // Fetch post list
+  const [globalData, setGlobalData] = useState();
 
-        const newPostsData = { ...postsData, posts };
-        console.log(newPostsData);
-
-        setPostsData(newPostsData);
-      });
-  };
-
-  const fetchDeletePost = (id) => {
-    fetch(`http://localhost:3000/posts/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res)
-      .then(() => {
-        fetchPostsData();
-      });
-  };
-
-  const [postsData, setPostsData] = useState({
-    posts: [],
-    deletePost: fetchDeletePost,
-  });
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetchPostsData();
+    fetch(apiUrl + "/posts")
+      .then((res) => res.json())
+      .then((data) => {
+        setGlobalData(data);
+        console.log(globalData);
+      });
   }, []);
-
   return (
-    <PostsContext.Provider value={postsData}>{children}</PostsContext.Provider>
+    <PostContext.Provider value={globalData}>{children}</PostContext.Provider>
   );
-};
-
-export const postsContext = () => {
-  return useContext(PostsContext);
 };
